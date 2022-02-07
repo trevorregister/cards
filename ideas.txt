@@ -1,0 +1,1 @@
+abstraction, new superclass called pile. Subclasses of deck, hand, library, graveyard, etc.
