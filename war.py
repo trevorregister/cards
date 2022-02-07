@@ -11,7 +11,6 @@ deck.shuffle()
 A.new_belonging("Hand", Pile())
 A.new_belonging("Library", Pile())
 
-
 B.new_belonging("Hand", Pile())
 B.new_belonging("Library", Pile())
 
@@ -64,8 +63,6 @@ def main():
     return turn_count
 
 main()
-
-
 
     
 
