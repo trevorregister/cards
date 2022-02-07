@@ -1,1 +1,1 @@
-run main() from war.py to simulate a game of war using a standard deck of playing cards. Turn count is printed and returned.
+run main() from war.py to simulate a game of war using a standard deck of playing cards. Turn count is printed/returned.
