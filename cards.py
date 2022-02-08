@@ -1,17 +1,10 @@
 import random as rand
 
-"""
-Cards are objects with a suit and a value, akin to a standard playing card. Piles are simply collections of cards, abstracted from the idea of things like a hand, 
-a discard pile, a draw pile, etc.
-
-Owners own piles by having them contained in the belongings dictionary.
-
-"""
-
 class Owner:
     """
     Parameters
-    name (str): name of the owner, akin to the name of a person
+
+    name (str): name of the Owner
 
     """
     def __init__(self, name):
@@ -23,8 +16,7 @@ class Owner:
     
     def new_belonging(self,name, pile):
         """
-        Creates a new belonging, such as a hand, library, discard, etc. A belonging is a key (name):value (pile) pair
-        within an Owners belongings dictionary.
+        Creates a new belonging.
 
         Parameters
         name (str):
@@ -36,7 +28,7 @@ class Owner:
     def draw_card(self, source, destination, amount):
         """
         Move one or more cards from a source pile to a destination pile, both of which must be within the owner's belongings.
-        The top card of the source pile is placed on the bottom fo the destination pile.
+        The top card of the source pile is placed on the bottom of the destination pile.
 
         Parameters
         source (str) - name of source belonging
@@ -51,9 +43,6 @@ class Owner:
             amount -= 1
 
 class Card:
-    """
-    It's a card.
-    """
     def __init__(self, suit, value):
         self.value = value
         self.suit = suit
@@ -62,10 +51,6 @@ class Card:
         return str(self.value) + " of " + self.suit
     
 class Pile:
-    """
-    A pile is a collection of cards. To own a pile, it must be within the belongings dictinary of an Owner.
-
-    """
     def __init__(self):
         self.contents = []
         self.size = len(self.contents)

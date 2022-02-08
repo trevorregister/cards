@@ -1,1 +1,11 @@
-run main() from war.py to simulate a game of war using a standard deck of playing cards. Turn count is printed & returned.
+I started off just wanting to simulate War, but then thought it'd be more interesting to be more abstract with cards.py so that other card games
+could be modeled. I wanted to model what you could do with cards (i.e., cards.py), then use that to code rules for individual games.
+
+Cards are objects with a suit and a value, akin to a standard playing card. Piles are collections of cards, abstracted from the idea of things like a hand, 
+a discard pile, a draw pile, etc. Each Card is an entry in a Pile's contents array.
+
+Piles are owned by Owners and are contained within an Owner's belongings. An Owner's belongings' is a dictionary where each key:value pair is the name of a Pile and the 
+Pile object, respectively. 
+
+Owners are intended to be both individual players as well as something like the game board. In that instance, the board could own the deck.
+

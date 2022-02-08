@@ -1,5 +1,10 @@
 from cards import *
 
+"""
+Simulates a single game of war. Once finished, the number of turns in the game is printed and return.
+
+"""
+
 A = Owner("A")
 B = Owner("B")
 Board = Owner("Board")
@@ -15,20 +20,19 @@ B.new_belonging("Hand", Pile())
 B.new_belonging("Library", Pile())
 
 Board.new_belonging("Deck", deck)
-Board.new_belonging("Sideboard", Pile())
+Board.new_belonging("Sideboard", Pile()) # used as a temporary placeholder before moving cards to the winner's library
 
 shift_card(Board.belongings["Deck"], A.belongings["Library"], 26)
 shift_card(Board.belongings["Deck"], B.belongings["Library"], 26)
 
 turn_count = 0
-A_win_count = 0
-B_win_count = 0
 
 def turn():
     winner = Board
-    while winner == Board:
-        if len(A.belongings["Library"].contents)==0 or len(B.belongings["Library"].contents)==0:
+    while winner == Board: #for handling ties. Loop repeats until a player wins.
+        if len(A.belongings["Library"].contents)==0 or len(B.belongings["Library"].contents)==0: # checks for an empty library, which means someone lost
             return "Game Over"
+
         A.draw_card("Library", "Hand", 1)
         B.draw_card("Library", "Hand", 1)
 
@@ -44,10 +48,12 @@ def turn():
         if A_card.value < B_card.value:
             winner = B
         
-        shift_card(A.belongings["Hand"], Board.belongings["Sideboard"], 1)
+        #the shifts below move all cards from the hand to the sideboard. The sideboard acts as a placeholder
+        #in case of a tie. Cards hang out there until there's a winner.
+        shift_card(A.belongings["Hand"], Board.belongings["Sideboard"], 1) 
         shift_card(B.belongings["Hand"], Board.belongings["Sideboard"], 1)
 
-    shift_card(Board.belongings["Sideboard"], winner.belongings["Library"], len(Board.belongings["Sideboard"].contents))        
+    shift_card(Board.belongings["Sideboard"], winner.belongings["Library"], len(Board.belongings["Sideboard"].contents)) #move all sideboard cards to the winner's library        
 
     #print (winner.name + " wins this round.")
     A.belongings["Library"].shuffle()
@@ -55,6 +61,7 @@ def turn():
     return winner
 
 def main():
+    deck.shuffle()
     turn_count = 0
     while turn() != "Game Over":
         turn()
@@ -62,8 +69,13 @@ def main():
     print(turn_count)
     return turn_count
 
-main()
+turns_to_end = []
 
-    
+def simulate(n): #still troubleshooting this one. All games after first one return 0 for turns_to_end.
+    while n > 0:
+        turns_to_end.append(main())
+        shift_card(A.belongings["Library"], Board.belongings["Deck"], len(A.belongings["Library"].contents))
+        shift_card(B.belongings["Library"], Board.belongings["Deck"], len(B.belongings["Library"].contents))        
+        n-=1
 
     
